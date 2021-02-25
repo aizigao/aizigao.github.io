@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>网络工程师思维导图分享 | 矮子高-博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="others">
+    <meta name="description" content="本博客持续修改与更新中，点击这里查看最新的内容[TOC]   前言这是小弟我13年考证用的笔记，分享一下，说不定有人喜欢呢:smile::smile:  思维导图的软件用的是 imindmap 在博客·结尾我会放出百度网盘的链接  导图在这里计算机网络:">
+<meta name="keywords" content="others">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络工程师思维导图分享">
+<meta property="og:url" content="http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="本博客持续修改与更新中，点击这里查看最新的内容[TOC]   前言这是小弟我13年考证用的笔记，分享一下，说不定有人喜欢呢:smile::smile:  思维导图的软件用的是 imindmap 在博客·结尾我会放出百度网盘的链接  导图在这里计算机网络:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/计算机网络.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/物理层.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/数据链路层.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/TCPUDP.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/应用层.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/以太网%20交换机.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/路由器.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/硬件.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/存储技术.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/网络规划与设计.jpeg">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/常用网络协议图.jpg">
+<meta property="og:updated_time" content="2021-02-23T05:34:11.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络工程师思维导图分享">
+<meta name="twitter:description" content="本博客持续修改与更新中，点击这里查看最新的内容[TOC]   前言这是小弟我13年考证用的笔记，分享一下，说不定有人喜欢呢:smile::smile:  思维导图的软件用的是 imindmap 在博客·结尾我会放出百度网盘的链接  导图在这里计算机网络:">
+<meta name="twitter:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/计算机网络.jpeg">
+    
+        <link rel="alternate" type="application/atom+xml" title="矮子高-博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars0.githubusercontent.com/u/14126445">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">矮子高</h5>
+          <a href="mailto:weixiangzhe@live.com" title="weixiangzhe@live.com" class="mail">weixiangzhe@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/aizigao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/pictool"  >
+                <i class="icon icon-lg icon-link"></i>
+                pictools
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">网络工程师思维导图分享</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">网络工程师思维导图分享</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-02T01:46:13.000Z" itemprop="datePublished" class="page-time">
+  2017-03-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导图在这里"><span class="post-toc-number">2.</span> <span class="post-toc-text">导图在这里</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机网络"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">计算机网络:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#物理层"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">物理层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据链路层"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">数据链路层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP-UDP"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">TCP UDP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用层"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">应用层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#以太网-交换"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">以太网 交换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由器"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">路由器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#硬件"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">硬件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储技术"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">存储技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络规划与设计"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">网络规划与设计</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用网络协议图"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">常用网络协议图</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分享链接"><span class="post-toc-number">3.</span> <span class="post-toc-text">分享链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-网络工程师思维导图分享"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">网络工程师思维导图分享</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-03-02 09:46:13" datetime="2017-03-02T01:46:13.000Z"  itemprop="datePublished">2017-03-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/">点击这里查看最新的内容</a></strong><br>[TOC]</p>
+<!-- toc -->
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这是小弟我13年考证用的笔记，分享一下，说不定有人喜欢呢:smile::smile:</p>
+<blockquote>
+<p>思维导图的软件用的是 imindmap</p>
+<p><strong>在博客·结尾我会放出百度网盘的链接</strong></p>
+</blockquote>
+<h1 id="导图在这里"><a href="#导图在这里" class="headerlink" title="导图在这里"></a>导图在这里</h1><h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络:"></a>计算机网络:</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/计算机网络.jpeg" alt="计算机网络" title>
+                </div>
+                <div class="image-caption">计算机网络</div>
+            </figure>
+
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/物理层.jpeg" alt="物理层" title>
+                </div>
+                <div class="image-caption">物理层</div>
+            </figure>
+
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/数据链路层.jpeg" alt="数据链路层" title>
+                </div>
+                <div class="image-caption">数据链路层</div>
+            </figure>
+
+
+<h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP UDP"></a>TCP UDP</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/TCPUDP.jpeg" alt="TCP&UDP" title>
+                </div>
+                <div class="image-caption">TCP&UDP</div>
+            </figure>
+
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/应用层.jpeg" alt="应用层" title>
+                </div>
+                <div class="image-caption">应用层</div>
+            </figure>
+
+
+
+
+<h2 id="以太网-交换"><a href="#以太网-交换" class="headerlink" title="以太网 交换"></a>以太网 交换</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/以太网%20交换机.jpeg" alt="以太网交换" title>
+                </div>
+                <div class="image-caption">以太网交换</div>
+            </figure>
+
+
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/路由器.jpeg" alt="路由器" title>
+                </div>
+                <div class="image-caption">路由器</div>
+            </figure>
+
+
+<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/硬件.jpeg" alt="硬件" title>
+                </div>
+                <div class="image-caption">硬件</div>
+            </figure>
+
+<h2 id="存储技术"><a href="#存储技术" class="headerlink" title="存储技术"></a>存储技术</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/存储技术.jpeg" alt="存储技术" title>
+                </div>
+                <div class="image-caption">存储技术</div>
+            </figure>
+
+
+<h2 id="网络规划与设计"><a href="#网络规划与设计" class="headerlink" title="网络规划与设计"></a>网络规划与设计</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/网络规划与设计.jpeg" alt="网络规划与设计" title>
+                </div>
+                <div class="image-caption">网络规划与设计</div>
+            </figure>
+
+<h2 id="常用网络协议图"><a href="#常用网络协议图" class="headerlink" title="常用网络协议图"></a>常用网络协议图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/常用网络协议图.jpg" alt="常用网络协议图" title>
+                </div>
+                <div class="image-caption">常用网络协议图</div>
+            </figure>
+
+
+<h1 id="分享链接"><a href="#分享链接" class="headerlink" title="分享链接"></a>分享链接</h1><blockquote>
+<ul>
+<li><a href="https://pan.baidu.com/s/1jINXSfs" target="_blank" rel="noopener">导图</a>    密码: rqgr</li>
+<li><a href="https://pan.baidu.com/s/1c2cgXMS" target="_blank" rel="noopener">学习视频</a> 密码： bvs9</li>
+</ul>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-23T05:34:11.828Z" itemprop="dateUpdated">2021-02-23 13:34:11</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/03/02/网络工程师思维导图分享/" target="_blank" rel="external">http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://aizigao.xyz">
+            <img src="https://avatars0.githubusercontent.com/u/14126445" alt="矮子高">
+            矮子高
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/others/">others</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&title=《网络工程师思维导图分享》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&title=《网络工程师思维导图分享》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网络工程师思维导图分享》 — 矮子高-博客&url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/07/黑苹果10-12-voodooPS2Controller-改caps为ctrl/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">黑苹果10.12.* voodooPS2Controller 改caps为ctrl</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用AHK减少鼠标和方向键的使用频率,高效编辑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '152de6ae30b2f77001c6',
+          clientSecret: 'd01f43bb91c75d9d134e87d89bad7fdb43eb1323',
+          repo: 'aizigao.github.io',
+          owner: 'aizigao',
+          admin: ['aizigao'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>矮子高 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&title=《网络工程师思维导图分享》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&title=《网络工程师思维导图分享》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网络工程师思维导图分享》 — 矮子高-博客&url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2017/03/02/网络工程师思维导图分享/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3aS07EMBAFQO5/aZBYE8/rjxmQKivEZJyUkdzNsz8+4uvz+zr/nI9wvufpzvxZ5QsPDw+v9epP1/nB50ee7z8/Jf/u+Vt4eHh493jVYlD9NJmI85skBQkPDw/vr/GSwpCw86a82srj4eHh/S9e0iInZSP/Fh4eHt57eflwSYvcy1d7k7KWteDh4eHFvK0NsN/8+Q37e3h4eHjB8tpboM8hRb6I5yM8joyHh4d3gZeHrZPQNo9rJ2FHlLXg4eHhLfEWDjbFm/2T6ShEt3h4eHiXeb0gIN8e641ZRRbqHh4eHt6YVy0M1e2r3rOq63y0OYeHh4e3yssX5d5r5fdXo+Hy3w0PDw9viZeHCL3Nql4kkccQ0UTj4eHhLfHyoLb30vkBgvn4P3yKh4eHd4E3OUaQLPG721qjEAQPDw9viVfOeotHEPJJ6RWPF2Pi4eHh/SKvl2dUP00CiEmBwcPDw7vB67XIeavdO5RQ3XJr5tN4eHh4LV7OmGze98LifOof3wEPDw/vAm8SnvaOQ1WX+60IGA8PD2/Oy5faatPcW757k1hopvHw8PCWeEn1yDeleq15NT6OxsHDw8O7wOtFBtWHzdvuZORzMcPDw8Pb4uX/6leLRz7CZCJeTDEeHh7eNd4c1muCq/FE/iw8PDy8e7z5Rle+xFeb4yT4KL8hHh4e3pg3Od6UwKohQq/Rf/wNHh4e3gVer42ufpofUIja4ny7Cw8PD+8C77N4nRfreSPeCx0e3w0PDw/vAm83VqjGsvNCkk8xHh4e3i5vNzwtnPCKl/vkzmZjjYeHhzfgTYrBJN6db7NF/zfg4eHh/RledYmflJ9mlIyHh4f3Vt5Wv5qXmaRsvHhPPDw8vGu86pLdS4V7T6k21gsxLh4eHl4/PWgGtdWiUo1oy2EuHh4e3g7vC33Y5Ck0Vx57AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

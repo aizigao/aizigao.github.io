@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作) | 矮子高-博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="个人笔记">
+    <meta name="description" content="简述Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。">
+<meta name="keywords" content="个人笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)">
+<meta property="og:url" content="http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="简述Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg">
+<meta property="og:updated_time" content="2021-02-23T23:17:15.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)">
+<meta name="twitter:description" content="简述Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。">
+<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="矮子高-博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars0.githubusercontent.com/u/14126445">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">矮子高</h5>
+          <a href="mailto:weixiangzhe@live.com" title="weixiangzhe@live.com" class="mail">weixiangzhe@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/aizigao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/pictool"  >
+                <i class="icon icon-lg icon-link"></i>
+                pictools
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-01T06:26:56.000Z" itemprop="datePublished" class="page-time">
+  2020-04-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简述"><span class="post-toc-number">1.</span> <span class="post-toc-text">简述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标志位与掩码的操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">标志位与掩码的操作</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-01 14:26:56" datetime="2020-04-01T06:26:56.000Z"  itemprop="datePublished">2020-04-01</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 <code>sudo chmod 777</code> 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg" alt="来源于菜鸟教程" title>
+                </div>
+                <div class="image-caption">来源于菜鸟教程</div>
+            </figure>
+
+
+<p>我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写<code>sudo chmod +wr</code>之类的，直到我翻看了下 <a href="https://en.wikipedia.org/wiki/Chmod" target="_blank" rel="noopener">wiki</a>, 看到了这样一张表</p>
+<table>
+<thead>
+<tr>
+<th align="center">#</th>
+<th align="center">Permission</th>
+<th align="center">rwx</th>
+<th align="center">Binary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">7</td>
+<td align="center">read, write and execute</td>
+<td align="center">rwx</td>
+<td align="center">111</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">read and write</td>
+<td align="center">rw-</td>
+<td align="center">110</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">read and execute</td>
+<td align="center">r-x</td>
+<td align="center">101</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">read only</td>
+<td align="center">r–</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">write and execute</td>
+<td align="center">-wx</td>
+<td align="center">011</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">write only</td>
+<td align="center">-w-</td>
+<td align="center">010</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">execute only</td>
+<td align="center">–x</td>
+<td align="center">001</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">none</td>
+<td align="center">—</td>
+<td align="center">000</td>
+</tr>
+</tbody></table>
+<p>懂了，421都是对应的二进制表示上的 1/0，1为开，0为关闭，极为清晰。然后也翻阅了一下 mdn 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">按位操作符</a>, 学习了下标志位与掩码的操作。</p>
+<h2 id="标志位与掩码的操作"><a href="#标志位与掩码的操作" class="headerlink" title="标志位与掩码的操作"></a>标志位与掩码的操作</h2><p>下面的例子来自MDN</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> FLAG_A = <span class="number">0b0001</span>; <span class="comment">// 0001 ant</span></span><br><span class="line"><span class="keyword">var</span> FLAG_B = <span class="number">0b0010</span>; <span class="comment">// 0010 bat</span></span><br><span class="line"><span class="keyword">var</span> FLAG_C = <span class="number">0b0100</span>; <span class="comment">// 0100 cat</span></span><br><span class="line"><span class="keyword">var</span> FLAG_D = <span class="number">0b1000</span>; <span class="comment">// 1000 duck</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mask = FLAG_A | FLAG_B | FLAG_D; <span class="comment">// 0001 | 0010 | 1000 =&gt; 1011</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flags = <span class="number">0b001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 cat</span></span><br><span class="line"><span class="keyword">if</span> (flags &amp; FLAG_C) &#123; <span class="comment">// 0101 &amp; 0100 =&gt; 0100 =&gt; true</span></span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 bat 或者 cat 至少一个</span></span><br><span class="line"><span class="comment">// (0101 &amp; 0010) || (0101 &amp; 0100) =&gt; 0000 || 0100 =&gt; true</span></span><br><span class="line"><span class="keyword">if</span> ((flags &amp; FLAG_B) || (flags &amp; FLAG_C)) &#123;</span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 bat 或者 cat 至少一个</span></span><br><span class="line"><span class="keyword">var</span> mask = FLAG_B | FLAG_C; <span class="comment">// 0010 | 0100 =&gt; 0110</span></span><br><span class="line"><span class="keyword">if</span> (flags &amp; mask) &#123; <span class="comment">// 0101 &amp; 0110 =&gt; 0100 =&gt; true</span></span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们有 cat 和 duck</span></span><br><span class="line"><span class="keyword">var</span> mask = FLAG_C | FLAG_D; <span class="comment">// 0100 | 1000 =&gt; 1100</span></span><br><span class="line">flags |= mask;   <span class="comment">// 0101 | 1100 =&gt; 1101</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们没有 ant 也没有 cat</span></span><br><span class="line"><span class="keyword">var</span> mask = ~(FLAG_A | FLAG_C); <span class="comment">// ~0101 =&gt; 1010</span></span><br><span class="line">flags &amp;= mask;   <span class="comment">// 1101 &amp; 1010 =&gt; 1000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们没有 ant 也没有 cat</span></span><br><span class="line"><span class="keyword">var</span> mask = ~FLAG_A &amp; ~FLAG_C;</span><br><span class="line">flags &amp;= mask;   <span class="comment">// 1101 &amp; 1010 =&gt; 1000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们以前没有 bat ，那么我们现在有 bat</span></span><br><span class="line"><span class="comment">// 但是如果我们已经有了一个，那么现在没有了</span></span><br><span class="line"><span class="comment">// 对 cat 也是相同的情况</span></span><br><span class="line"><span class="keyword">var</span> mask = FLAG_B | FLAG_C;</span><br><span class="line">flags = flags ^ mask;   <span class="comment">// 1100 ^ 0110 =&gt; 1010</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// entering parallel universe...</span></span><br><span class="line">flags = ~flags;    <span class="comment">// ~1010 =&gt; 0101</span></span><br></pre></td></tr></table></figure>
+
+<p>这样大大的简化比较，在React也大量使用这种方式；</p>
+<p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了/">点击这里查看最新的内容</a></strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-23T23:17:15.096Z" itemprop="dateUpdated">2021-02-24 07:17:15</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/" target="_blank" rel="external">http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://aizigao.xyz">
+            <img src="https://avatars0.githubusercontent.com/u/14126445" alt="矮子高">
+            矮子高
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个人笔记/">个人笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&title=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&title=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/23/看完了贝赛尔函数wiki-我终于理解这玩意了/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">看完了贝赛尔函数wiki,我终于看懂了</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/25/配置nginx-sourceMap只供内网访问/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">配置nginx-sourceMap只供内网访问</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '152de6ae30b2f77001c6',
+          clientSecret: 'd01f43bb91c75d9d134e87d89bad7fdb43eb1323',
+          repo: 'aizigao.github.io',
+          owner: 'aizigao',
+          admin: ['aizigao'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>矮子高 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&title=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&title=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)》 — 矮子高-博客&url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2020/04/01/看完这张图后，我终于记住了chmod的数值了_标志位与掩码的操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAEA0lEQVR42u3aS24bMRAFQN3/0gqQTRbOzLzXTdkJUFwZskWRNQZa/Xm94vX+va5e/7qu3vv15/yV/Az3Zz6wcODAgQNHcNX7i11dMjl6Qna1Z/sw8rNdngQHDhw4cBziuA+u99dor51cvoVLOKIvEDhw4MCB4xs57j84uUDyyowpTx1x4MCBA8e/w/EJlFl1LtkNBw4cOHD8LEdSHJyF5DZwzgqR+fmP1Upx4MCBA8dzve7VBq3/5ecPznfgwIEDB444xOZhclbyOzXi1iaWl7fDgQMHDhxrjrwhlI845HCbq25oHnbDgQMHDhwLjvdobZKoWSEveQDtY8CBAwcOHJ/j2BQEk7ZQPhLRBvv8q0C0Pw4cOHDgOMrRFgfbQ58dibjfZ1jQxIEDBw4chzjaAbI8gCXBNXkkbfuqPWGRX+LAgQMHjqB3k4TAWUo22zNvOCUBuMXFgQMHDhwbjjbE7iHaUmAS2tvRh+j/AgcOHDhwrDlyoLy10xbs2t1mobdI3nDgwIEDx2gSIE+iNulcHmKTYF80k9qFAwcOHDgWHG1TJw/PyUFn4fDUmMVlCocDBw4cOD7A0Qaztl3UFvXapHH2ZQIHDhw4cJziaAtts5ZSvmb77P8SBw4cOHDsOWahMSnqzcLhrBC5LywOJyNw4MCBA0eQws3KcJuCYNuyattdxZcDHDhw4MBxiGN2rDxA5iW/NgC3JcWH3XDgwIEDx5qjvV7SiNrwzS7f7vBwfhw4cODAcYijLaslR5mV7Wbtrk1xsxhrwIEDBw4cZca0ScP2B92kkbOhvQdoHDhw4MBRctw3aTbHytO8WesoH7krmmE4cODAgeMQR7JRcuFZkMs/pU0g23vhwIEDB45THPtSYN7EOnWN2deCh9PiwIEDB46jHG1CtW9KtcneJpQWk4M4cODAgWPBMSvYzUp4eZExKQXOmJIdcODAgQPHhiNPk2bp0yb9S/4yb2hFgRwHDhw4cBzieJWrLd7Nrv2O1z6ZHNZKceDAgQNH3GfJ20VtGpa3ptrwnHwheNgZBw4cOHAc4mjHAvICXB4O8+Jg/t46BcWBAwcOHIc4Zi2oNpGbNZNmhcg2bOPAgQMHjlMcbfKW/LZImRZDFW1yWJQmceDAgQPHguNdrvswtoHblBFn+xcZLQ4cOHDgOFOve7VB99Q1Nsnk5jHgwIEDB45THHkhbwZ3T9Nesk3V6v8CHDhw4MBxiGM2ZNCOrLWPZ3b59r5/KRHiwIEDB45v4WgD4Wy4rS0ybkqWlykcDhw4cOD4Ro48NOaDDq+jaxbaceDAgQPHWY58YPr+XW14m41rt4PgUfKGAwcOHDgOcex7Me3HtKXG2ThdXuJcjcrhwIEDB44/6xcCVrnMQcgvwwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
