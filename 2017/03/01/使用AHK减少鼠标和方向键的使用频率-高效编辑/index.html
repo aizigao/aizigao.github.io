@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用AHK减少鼠标和方向键的使用频率,高效编辑 | 矮子高-博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="tools">
+    <meta name="description" content="本博客持续修改与更新中，点击这里 查看最新的内容  [TOC] autohotkey是一款热键脚本语言，网上相关的介绍很多，我这不多介绍。一般敲多的码的人，对方向键、键盘和鼠标之间来回移动都会觉的是一件很麻烦的事，使用vim的除外，所以我这在这里介绍使autohot实现鼠标与方向键的功能。 一般来说平时capslock键和scrllLock 这两个键使用的频率非常低，我们可以将caplock设为和">
+<meta name="keywords" content="tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用AHK减少鼠标和方向键的使用频率,高效编辑">
+<meta property="og:url" content="http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="本博客持续修改与更新中，点击这里 查看最新的内容  [TOC] autohotkey是一款热键脚本语言，网上相关的介绍很多，我这不多介绍。一般敲多的码的人，对方向键、键盘和鼠标之间来回移动都会觉的是一件很麻烦的事，使用vim的除外，所以我这在这里介绍使autohot实现鼠标与方向键的功能。 一般来说平时capslock键和scrllLock 这两个键使用的频率非常低，我们可以将caplock设为和">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20160110184918826">
+<meta property="og:updated_time" content="2021-02-23T05:34:11.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用AHK减少鼠标和方向键的使用频率,高效编辑">
+<meta name="twitter:description" content="本博客持续修改与更新中，点击这里 查看最新的内容  [TOC] autohotkey是一款热键脚本语言，网上相关的介绍很多，我这不多介绍。一般敲多的码的人，对方向键、键盘和鼠标之间来回移动都会觉的是一件很麻烦的事，使用vim的除外，所以我这在这里介绍使autohot实现鼠标与方向键的功能。 一般来说平时capslock键和scrllLock 这两个键使用的频率非常低，我们可以将caplock设为和">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160110184918826">
+    
+        <link rel="alternate" type="application/atom+xml" title="矮子高-博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars0.githubusercontent.com/u/14126445">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">矮子高</h5>
+          <a href="mailto:weixiangzhe@live.com" title="weixiangzhe@live.com" class="mail">weixiangzhe@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/aizigao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/pictool"  >
+                <i class="icon icon-lg icon-link"></i>
+                pictools
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用AHK减少鼠标和方向键的使用频率,高效编辑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用AHK减少鼠标和方向键的使用频率,高效编辑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-01T07:15:53.000Z" itemprop="datePublished" class="page-time">
+  2017-03-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#鼠标功能"><span class="post-toc-number">1.</span> <span class="post-toc-text">鼠标功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方向键与其它光标的功能："><span class="post-toc-number">2.</span> <span class="post-toc-text">方向键与其它光标的功能：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拾色器"><span class="post-toc-number">3.</span> <span class="post-toc-text">拾色器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#剪切板"><span class="post-toc-number">4.</span> <span class="post-toc-text">剪切板</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-使用AHK减少鼠标和方向键的使用频率-高效编辑"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用AHK减少鼠标和方向键的使用频率,高效编辑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-03-01 15:15:53" datetime="2017-03-01T07:15:53.000Z"  itemprop="datePublished">2017-03-01</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>本博客持续修改与更新中，点击<a href="http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/">这里</a> 查看最新的内容</strong> </p>
+<p>[TOC]</p>
+<p><a href="https://www.autohotkey.com/" target="_blank" rel="noopener">autohotkey</a>是一款热键脚本语言，网上相关的介绍很多，我这不多介绍。一般敲多的码的人，对方向键、键盘和鼠标之间来回移动都会觉的是一件很麻烦的事，使用vim的除外，所以我这在这里介绍使autohot实现鼠标与方向键的功能。</p>
+<p>一般来说平时capslock键和scrllLock 这两个键使用的频率非常低，我们可以将caplock设为和ctl、alt、win一样的功能键，但是使用capslock这个设置会有出现大小写切换的问题，使用ahk这个软件来换键并不是一个好的解决方案，所以我还要用到另一个改键软件 <strong>KeyTweak</strong>。KeyTweakn改键原理是修改注册表，比ahk更为彻底，我将caplock和scrllLock相换一下，以后大小切换就是scrllLock了（我平时都是按shift的）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://img.blog.csdn.net/20160110184918826" alt="这里写图片描述" title>
+                </div>
+                <div class="image-caption">这里写图片描述</div>
+            </figure>
+
+<p>下面开始在ahk中编辑。</p>
+<h2 id="鼠标功能"><a href="#鼠标功能" class="headerlink" title="鼠标功能"></a><strong>鼠标功能</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这部分代码来自http://www.ahk8.com/，年代久远原作者记记是谁了。。</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">SetScrollLockState, AlwaysOff;禁用SetScrollLockState</span><br><span class="line"><span class="meta">#</span>SingleInstance</span><br><span class="line">count = 0</span><br><span class="line">JoyMultiplier = 0.20</span><br><span class="line">JoyThreshold = 3</span><br><span class="line">JoyThresholdUpper := 50 + JoyThreshold</span><br><span class="line">JoyThresholdLower := 50 - JoyThreshold</span><br><span class="line">YAxisMultiplier = -1</span><br><span class="line">SetTimer, WatchKeyboard, 10</span><br><span class="line"></span><br><span class="line">Hotkey, F1, ButtonLeft ;F1模拟左键</span><br><span class="line">Hotkey, F2, ButtonRight;F2模拟右键</span><br><span class="line">Hotkey, up, empty</span><br><span class="line">Hotkey, down, empty</span><br><span class="line">Hotkey, left, empty</span><br><span class="line">Hotkey, right, empty</span><br><span class="line">Return</span><br><span class="line"></span><br><span class="line">ScrollLock &amp; F1:: ;开启鼠标功能</span><br><span class="line">SetTimer, WatchKeyboard, 10</span><br><span class="line">Hotkey, F1, On</span><br><span class="line">Hotkey, F2, On</span><br><span class="line">Hotkey, up, On</span><br><span class="line">Hotkey, down, On</span><br><span class="line">Hotkey, left, On</span><br><span class="line">Hotkey, right, On</span><br><span class="line">Return</span><br><span class="line"></span><br><span class="line">ScrollLock &amp; F2::;关闭鼠标功能</span><br><span class="line">SetTimer, WatchKeyboard, Off</span><br><span class="line">Hotkey, F1, Off</span><br><span class="line">Hotkey, F2, Off</span><br><span class="line">Hotkey, up, Off</span><br><span class="line">Hotkey, down, Off</span><br><span class="line">Hotkey, left, Off</span><br><span class="line">Hotkey, right, Off</span><br><span class="line">Return</span><br><span class="line"></span><br><span class="line">empty:</span><br><span class="line">Return</span><br><span class="line">WatchKeyboard:</span><br><span class="line">MouseNeedsToBeMoved := false  ; Set default.</span><br><span class="line">JoyMultiplier+=0.01</span><br><span class="line">SetFormat, float, 03</span><br><span class="line">up:=GetKeyState("Up","p")</span><br><span class="line">down:=GetKeyState("Down","p")</span><br><span class="line">Left:=GetKeyState("Left","p")</span><br><span class="line">right:=GetKeyState("Right","p")</span><br><span class="line">if(Right)</span><br><span class="line">&#123;</span><br><span class="line">    MouseNeedsToBeMoved := true</span><br><span class="line">    DeltaX := 10</span><br><span class="line">&#125;</span><br><span class="line">else if(Left)</span><br><span class="line">&#123;</span><br><span class="line">    MouseNeedsToBeMoved := true</span><br><span class="line">    DeltaX := -10</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">    DeltaX = 0</span><br><span class="line">if (up)</span><br><span class="line">&#123;</span><br><span class="line">    MouseNeedsToBeMoved := true</span><br><span class="line">    DeltaY := 10</span><br><span class="line">&#125;</span><br><span class="line">else if (Down)</span><br><span class="line">&#123;</span><br><span class="line">    MouseNeedsToBeMoved := true</span><br><span class="line">    DeltaY := -10</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">    DeltaY = 0</span><br><span class="line">if MouseNeedsToBeMoved</span><br><span class="line">&#123;</span><br><span class="line">    SetMouseDelay, -1  ; Makes movement smoother.</span><br><span class="line">    MouseMove, DeltaX * JoyMultiplier, DeltaY * JoyMultiplier * YAxisMultiplier, 0, R</span><br><span class="line">&#125;</span><br><span class="line">Else</span><br><span class="line">count++</span><br><span class="line"><span class="meta">If(count&gt;</span>20)&#123;</span><br><span class="line">JoyMultiplier = 0.30</span><br><span class="line">count=0</span><br><span class="line">&#125;</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line">ButtonLeft:</span><br><span class="line">SetMouseDelay, -1  ; Makes movement smoother.</span><br><span class="line">MouseClick, left,,, 1, 0, D  ; Hold down the left mouse button.</span><br><span class="line">SetTimer, WaitForLeftButtonUp, 10</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line">ButtonRight:</span><br><span class="line">SetMouseDelay, -1  ; Makes movement smoother.</span><br><span class="line">MouseClick, right,,, 1, 0, D  ; Hold down the right mouse button.</span><br><span class="line">SetTimer, WaitForRightButtonUp, 10</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WaitForLeftButtonUp:;使用支持鼠标手势</span><br><span class="line">if GetKeyState("F1")</span><br><span class="line">    return  ; The button is still, down, so keep waiting.</span><br><span class="line">; Otherwise, the button has been released.</span><br><span class="line">SetTimer, WaitForLeftButtonUp, off</span><br><span class="line">SetMouseDelay, -1  ; Makes movement smoother.</span><br><span class="line">MouseClick, left,,, 1, 0, U  ; Release the mouse button.</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line">WaitForRightButtonUp:</span><br><span class="line">if GetKeyState("F2")</span><br><span class="line">    return  ; The button is still, down, so keep waiting.</span><br><span class="line">; Otherwise, the button has been released.</span><br><span class="line">SetTimer, WaitForRightButtonUp, off</span><br><span class="line">MouseClick, right,,, 1, 0, U  ; Release the mouse button.</span><br><span class="line">return</span><br><span class="line">;;endmouse</span><br></pre></td></tr></table></figure>
+
+<h2 id="方向键与其它光标的功能："><a href="#方向键与其它光标的功能：" class="headerlink" title="方向键与其它光标的功能："></a><strong>方向键与其它光标的功能：</strong></h2><p>按我的设置上下左右分别为caps+i/j/k/l/j;home,end,delete，pgup,pgdn为caps+h/n/o/[/];</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">;scroll事件</span><br><span class="line">ScrollLock &amp; [::send,&#123;WheelUp&#125;</span><br><span class="line">ScrollLock &amp; ]::send,&#123;WheelDown&#125;</span><br><span class="line">; move left</span><br><span class="line">ScrollLock &amp; j::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;Left&#125;</span><br><span class="line">else if GetKeyState("LAlt", "P")</span><br><span class="line">    send,^&#123;left&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;Left&#125;</span><br><span class="line">Return</span><br><span class="line">; move right</span><br><span class="line">ScrollLock &amp; l::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;right&#125;</span><br><span class="line">else if GetKeyState("LAlt", "P")</span><br><span class="line">    send,^&#123;right&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;right&#125;</span><br><span class="line">Return</span><br><span class="line">; move up</span><br><span class="line">ScrollLock &amp; i::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;up&#125;</span><br><span class="line">else if GetKeyState("LAlt", "P")</span><br><span class="line">    send,^!&#123;up&#125;</span><br><span class="line">else if GetKeyState("LControl", "P")</span><br><span class="line">    send,^+&#123;up&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;up&#125;</span><br><span class="line">Return</span><br><span class="line">; move down</span><br><span class="line">ScrollLock &amp; k::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;down&#125;</span><br><span class="line">else if GetKeyState("LAlt", "P")</span><br><span class="line">    send,^!&#123;down&#125;</span><br><span class="line">else if GetKeyState("LControl", "P")</span><br><span class="line">    send,^+&#123;down&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;down&#125;</span><br><span class="line">Return</span><br><span class="line">;home</span><br><span class="line">ScrollLock &amp; h::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;home&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;home&#125;</span><br><span class="line">Return</span><br><span class="line">; end</span><br><span class="line">ScrollLock &amp; n::</span><br><span class="line">if GetKeyState("LShift", "P")</span><br><span class="line">    send, +&#123;end&#125;</span><br><span class="line">else</span><br><span class="line">    send, &#123;end&#125;</span><br><span class="line">Return</span><br><span class="line">;delelte</span><br><span class="line">ScrollLock &amp; o::send,&#123;delete&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拾色器"><a href="#拾色器" class="headerlink" title="拾色器"></a><strong>拾色器</strong></h2><p>利用ahk设置的拾色器非常方便，这里设置的快揵是alt+win+c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">!#c::</span><br><span class="line">    MouseGetPos, mouseX, mouseY</span><br><span class="line">    PixelGetColor, color, %mouseX%, %mouseY%, RGB</span><br><span class="line">    StringRight color,color,6</span><br><span class="line">    clipboard = #%color%</span><br><span class="line">    tooltip,color is %color%</span><br><span class="line">    sleep 2000</span><br><span class="line">    tooltip,</span><br><span class="line">return123456789123456789</span><br></pre></td></tr></table></figure>
+
+<h2 id="剪切板"><a href="#剪切板" class="headerlink" title="剪切板"></a>剪切板</h2><p>系统自带的剪切板只能一起复制与粘贴，下面的剪切板支持最多30次copy，热键如下：</p>
+<ol>
+<li>;win+0：清空 ;</li>
+<li>ctrl+c：复制 ;</li>
+<li>win+v：依次粘贴 ;</li>
+<li>win+]：依次粘贴，但顺序相反</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line">handleClip(action)</span><br><span class="line">&#123;</span><br><span class="line">global static AddNextNum</span><br><span class="line">global static GetNextNum</span><br><span class="line">global static HighestNum</span><br><span class="line">global static getprevnum</span><br><span class="line">global static highest1</span><br><span class="line">global static ClipArray</span><br><span class="line">global static ClipArray1</span><br><span class="line">global static ClipArray2</span><br><span class="line">global static ClipArray3</span><br><span class="line">global static ClipArray4</span><br><span class="line">global static ClipArray5</span><br><span class="line">global static ClipArray6</span><br><span class="line">global static ClipArray7</span><br><span class="line">global static ClipArray8</span><br><span class="line">global static ClipArray9</span><br><span class="line">global static ClipArray10</span><br><span class="line">global static ClipArray11</span><br><span class="line">global static ClipArray12</span><br><span class="line">global static ClipArray13</span><br><span class="line">global static ClipArray14</span><br><span class="line">global static ClipArray15</span><br><span class="line">global static ClipArray16</span><br><span class="line">global static ClipArray17</span><br><span class="line">global static ClipArray18</span><br><span class="line">global static ClipArray19</span><br><span class="line">global static ClipArray20</span><br><span class="line">global static ClipArray21</span><br><span class="line">global static ClipArray22</span><br><span class="line">global static ClipArray23</span><br><span class="line">global static ClipArray24</span><br><span class="line">global static ClipArray25</span><br><span class="line">global static ClipArray26</span><br><span class="line">global static ClipArray27</span><br><span class="line">global static ClipArray28</span><br><span class="line">global static ClipArray29</span><br><span class="line">global static ClipArray30</span><br><span class="line"></span><br><span class="line">if (action = "save")</span><br><span class="line">&#123;</span><br><span class="line">if (AddNextNum &lt; 30)</span><br><span class="line">&#123;</span><br><span class="line">AddNextNum += 1 ;</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">AddNextNum := 1 ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if (HighestNum &lt; 30)</span><br><span class="line">&#123;</span><br><span class="line">HighestNum += 1 ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GetNextNum := AddNextNum ;</span><br><span class="line"><span class="meta">ClipArray%</span>AddNextNum% := Clipboard</span><br><span class="line">highest1 := highestnum + 1</span><br><span class="line">getprevnum := 1</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">else if ((action = "get") OR (action = "roll"))</span><br><span class="line">&#123;</span><br><span class="line">if (GetNextNum != 0)</span><br><span class="line">&#123;</span><br><span class="line">if (action = "roll")</span><br><span class="line">&#123;</span><br><span class="line">Send, ^z</span><br><span class="line">&#125;</span><br><span class="line">Clipboard := ClipArray%GetNextNum%</span><br><span class="line">if (GetNextNum &gt; 1)</span><br><span class="line">&#123;</span><br><span class="line">GetNextNum -= 1 ;</span><br><span class="line">getprevnum++</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">getprevnum := 1</span><br><span class="line">GetNextNum := HighestNum</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">Send, ^v</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else if (action = "get-reverse")</span><br><span class="line">&#123;</span><br><span class="line">if (GetNextNum != 0)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">Clipboard := ClipArray%getprevnum%</span><br><span class="line">if (GetNextNum &gt; 1)</span><br><span class="line">&#123;</span><br><span class="line">GetNextNum -= 1 ;</span><br><span class="line">getprevnum++</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">getprevnum := 1</span><br><span class="line">GetNextNum := HighestNum</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">Send, ^v</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">else if (action = "rollforward")</span><br><span class="line">&#123;</span><br><span class="line">if (GetNextNum != 0)</span><br><span class="line">&#123;</span><br><span class="line">Send, ^z</span><br><span class="line">if (GetNextNum &lt; HighestNum)</span><br><span class="line">&#123;</span><br><span class="line">GetNextNum += 1 ;</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">GetNextNum := 1</span><br><span class="line">&#125;</span><br><span class="line">Clipboard := ClipArray%GetNextNum%</span><br><span class="line">Send, ^v</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else if (action = "clear")</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">GetNextNum := 0</span><br><span class="line">AddNextNum := 0</span><br><span class="line">HighestNum := 0</span><br><span class="line">getprevnum := 0</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>0::</span><br><span class="line">handleClip("clear")</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line">^c::</span><br><span class="line">suspend on</span><br><span class="line">Send, ^c</span><br><span class="line">suspend off</span><br><span class="line">handleClip("save")</span><br><span class="line"></span><br><span class="line">return</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>v::</span><br><span class="line">    handleClip("get-reverse")</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>]::</span><br><span class="line">    handleClip("get")</span><br><span class="line">return</span><br><span class="line">; #\::</span><br><span class="line">;   handleClip("roll")</span><br><span class="line">;   ToolTip,</span><br><span class="line">;   sleep 2000</span><br><span class="line">;   tooltip,</span><br><span class="line">; return</span><br><span class="line"><span class="meta">#</span>/::</span><br><span class="line">    clipboard =</span><br><span class="line">return</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>^\::</span><br><span class="line">    handleClip("rollforward")</span><br><span class="line">return</span><br><span class="line">; end 剪切板</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-23T05:34:11.828Z" itemprop="dateUpdated">2021-02-23 13:34:11</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" target="_blank" rel="external">http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://aizigao.xyz">
+            <img src="https://avatars0.githubusercontent.com/u/14126445" alt="矮子高">
+            矮子高
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&title=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&title=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/02/网络工程师思维导图分享/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">网络工程师思维导图分享</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/24/css3实现固定表格头部而无需设置单元格td的宽度/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">css3实现固定表格头部而无需设置单元格td的宽度</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: '152de6ae30b2f77001c6',
+          clientSecret: 'd01f43bb91c75d9d134e87d89bad7fdb43eb1323',
+          repo: 'aizigao.github.io',
+          owner: 'aizigao',
+          admin: ['aizigao'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>矮子高 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&title=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&title=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用AHK减少鼠标和方向键的使用频率,高效编辑》 — 矮子高-博客&url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2017/03/01/使用AHK减少鼠标和方向键的使用频率-高效编辑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJklEQVR42u3aMXbCUAwEQO5/adKkSzAryfCMGFcpbOxRo2j1b7f4uh9ef+/8+9Tx7yT3H3/V7RUXNjY29oewE1JCndw/KXFS1n/ehY2Njb2O/ej1x/f0GtVxaZKG9Oj+xIKNjY2NnTeS4/urRZyUDBsbGxu7GgxNMpzel2BjY2NjVz8o/5TePZPGeXKWho2NjX15dr4Vvf7fL9lvY2NjY1+YfS9e1V+rrgqqw0xTgY2Njb2IXV2sVoeH+XGcaqRV+H5sbGzsFeyzDkEm4VESKh0/lS99n7wRGxsbex07WYsmA0B+f9Ia82Cr2nSxsbGx97HzNnNvXb2hpVrEpB1iY2Njb2XPA/q8KeaFrpa7UFBsbGzs1ezeEJI3j7zQeXvLpwxsbGzsb2BX/63vwfIi5r+fLyewsbGxN7EnA0Ae3PeemrSxKHjCxsbGXsSeB+75sjYfGKrHfZqDDTY2NvYidr4M6LWianHL69ti+8TGxsbexO4tCXrHbqrDxqToT74WGxsbex07j++j8P0VAVAwzBQWHtjY2Ngr2L0DlL1GUl1C9Kao6FlsbGzs1ezJmjZvb/P3jtoqNjY29jp2NbipLgbyJW41cqq+5fcebGxs7EXs3iBRBfcWANFHFwuEjY2NvZt97lo3eXEvTpoc2SzvKLCxsbEvz+5FNtU2c/zpediUt8los42NjY29gl0N65OGl1yToSVZTkS/iY2Njb2CnQcxyWI1GQZ65Th55YyNjY29lJ0H8b0ukDPyMza9RoiNjY29iT2J73tlqja8N+1GsLGxsT+cnQTryagwAc97TXWpgI2Njb2PXW1d54ZK1UVF8lS0FcHGxsZexM6bR9Qe4tDqBEAcez0cRbCxsbE/lv26ozbVMabaFKsB05tOGGFjY2O/nV1tBvnHJbFR0q56x3rywQYbGxt7B7sa91SP4OSYauuaDDnY2NjY+9jzxvCe0kyuKEvDxsbG/gJ2vjM969BPvn7I1xLY2NjY38yuHuXptbdJXBU1TmxsbOx17GrcMzmgkxTorCKesB7AxsbGvjy7HMfE8VC+Kq4+lWNG4RQ2Njb21dk/jpZT7zgmcGYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
