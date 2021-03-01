@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>RegExp先行断言后行断言看了半天不懂一看英文我悟到了 | 矮子高-博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="个人吐槽">
+    <meta name="description" content="背景最近系统性的学习了遍正则, 开始看的是中文档，看到先行断言和后行断言时，又开始蒙逼了。我完全不能理解“先行断言”和“后行断言”这两个词的意思。 学习打开英文文档, 得到下面这两张表    Characters / constructs Corresponding article    \, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W,">
+<meta name="keywords" content="个人吐槽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RegExp先行断言后行断言看了半天不懂一看英文我悟到了">
+<meta property="og:url" content="http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="背景最近系统性的学习了遍正则, 开始看的是中文档，看到先行断言和后行断言时，又开始蒙逼了。我完全不能理解“先行断言”和“后行断言”这两个词的意思。 学习打开英文文档, 得到下面这两张表    Characters / constructs Corresponding article    \, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-02-24T23:28:44.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RegExp先行断言后行断言看了半天不懂一看英文我悟到了">
+<meta name="twitter:description" content="背景最近系统性的学习了遍正则, 开始看的是中文档，看到先行断言和后行断言时，又开始蒙逼了。我完全不能理解“先行断言”和“后行断言”这两个词的意思。 学习打开英文文档, 得到下面这两张表    Characters / constructs Corresponding article    \, ., \cX, \d, \D, \f, \n, \r, \s, \S, \t, \v, \w, \W,">
+    
+        <link rel="alternate" type="application/atom+xml" title="矮子高-博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars0.githubusercontent.com/u/14126445">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">矮子高</h5>
+          <a href="mailto:weixiangzhe@live.com" title="weixiangzhe@live.com" class="mail">weixiangzhe@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/aizigao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/pictool"  >
+                <i class="icon icon-lg icon-link"></i>
+                pictools
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RegExp先行断言后行断言看了半天不懂一看英文我悟到了</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">RegExp先行断言后行断言看了半天不懂一看英文我悟到了</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-23T06:24:26.000Z" itemprop="datePublished" class="page-time">
+  2018-10-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图型展示一下"><span class="post-toc-number">3.</span> <span class="post-toc-text">图型展示一下</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">4.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-RegExp先行断言后行断言看了半天不懂一看英文我悟到了"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RegExp先行断言后行断言看了半天不懂一看英文我悟到了</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-23 14:24:26" datetime="2018-10-23T06:24:26.000Z"  itemprop="datePublished">2018-10-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近系统性的学习了遍<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">正则</a>, 开始看的是中文档，看到先行断言和后行断言时，又开始蒙逼了。我完全不能理解“先行断言”和“后行断言”这两个词的意思。</p>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>打开<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">英文文档</a>, 得到下面这两张表</p>
+<table>
+<thead>
+<tr>
+<th align="left">Characters / constructs</th>
+<th align="left">Corresponding article</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>\</code>, <code>.</code>, <code>\cX</code>, <code>\d</code>, <code>\D</code>, <code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\s</code>, <code>\S</code>, <code>\t</code>, <code>\v</code>, <code>\w</code>, <code>\W</code>, <code>\0</code>, <code>\xhh</code>, <code>\uhhhh</code>, <code>\uhhhhh</code>, <code>[\b]</code></td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes" target="_blank" rel="noopener">Character classes</a></td>
+</tr>
+<tr>
+<td align="left"><code>^</code>, <code>$</code>, <code>x(?=y)</code>, <code>x(?!y)</code>, <code>(?&lt;=y)x</code>, <code>(?&lt;!y)x</code>, <code>\b</code>, <code>\B</code></td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions" target="_blank" rel="noopener">Assertions</a></td>
+</tr>
+<tr>
+<td align="left"><code>(x)</code>, <code>(?:x)</code>, <code>(?&lt;Name&gt;x)</code>, `x</td>
+<td align="left">y<code>,</code>[xyz]<code>,</code>[^xyz]<code>,</code>*Number*`</td>
+</tr>
+<tr>
+<td align="left"><code>*</code>, <code>+</code>, <code>?</code>, <code>x{*n*}</code>, <code>x{*n*,}</code>, <code>x{*n*,*m*}</code></td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers" target="_blank" rel="noopener">Quantifiers</a></td>
+</tr>
+<tr>
+<td align="left"><code>\p{*UnicodeProperty*}</code>, <code>\P{*UnicodeProperty*}</code></td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Unicode_Property_Escapes" target="_blank" rel="noopener">Unicode property escapes</a></td>
+</tr>
+</tbody></table>
+<p>好吧，断言就是Assertions，先行和后行表示位置，看来还是很信达雅的，就是没有看到原文的话还真看不懂了，之后还是要多翻英文档了。其中“先行” 以应 ‘lookahead’ （看头），“后行”为 ‘lookbehind’(看尾)。</p>
+<p>各种断言也在这里记录一下吧</p>
+<table>
+<thead>
+<tr>
+<th align="left">Characters</th>
+<th align="left">中文</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>x(?=y)</code></td>
+<td align="left">先行断言</td>
+<td align="left"><strong>Lookahead assertion:</strong> (positive lookahead) Matches “x” only if “x” is followed by “y”. For example, /<code>Jack(?=Sprat)/</code> matches “Jack” only if it is followed by “Sprat”. `/Jack(?=Sprat</td>
+</tr>
+<tr>
+<td align="left"><code>x(?!y)</code></td>
+<td align="left">正向否定查找(这个翻译的也不好，反正我不理解)</td>
+<td align="left"><strong>Negative lookahead assertion:</strong> Matches “x” only if “x” is not followed by “y”. For example, <code>/\d+(?!\.)/</code> matches a number only if it is not followed by a decimal point. <code>/\d+(?!\.)/.exec(&#39;3.141&#39;)</code> matches “141” but not “3”.</td>
+</tr>
+<tr>
+<td align="left"><code>(?&lt;=y)x</code></td>
+<td align="left">后行断言</td>
+<td align="left"><strong>Lookbehind assertion:</strong> Matches “x” only if “x” is preceded by “y”. For example, <code>/(?&lt;=Jack)Sprat/</code> matches “Sprat” only if it is preceded by “Jack”. `/(?&lt;=Jack</td>
+</tr>
+<tr>
+<td align="left"><code>(?&lt;!y)x</code></td>
+<td align="left">反向否定查找</td>
+<td align="left"><strong>Negative lookbehind assertion:</strong> Matches “x” only if “x” is not preceded by “y”. For example, <code>/(?&lt;!-)\d+/</code> matches a number only if it is not preceded by a minus sign. <code>/(?&lt;!-)\d+/.exec(&#39;3&#39;)</code> matches “3”. <code>/(?&lt;!-)\d+/.exec(&#39;-3&#39;)</code> match is not found because the number is preceded by the minus sign.</td>
+</tr>
+</tbody></table>
+<h2 id="图型展示一下"><a href="#图型展示一下" class="headerlink" title="图型展示一下"></a>图型展示一下</h2><blockquote>
+<p>可以在 <a href="https://regexper.com/" target="_blank" rel="noopener">https://regexper.com/</a> 这个网站测试一下正则还是</p>
+</blockquote>
+<p><strong>先行断言/positive lookahead</strong></p>
+<iframe height="600" width="100%" src="https://regexper.com/#%2FJack%28%3F%3DSprat%29%2F" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>正向否定/negative lookahead</strong></p>
+<iframe height="600" width="100%" src="https://regexper.com/#%2FJack%28%3F!%3DSprat%29%2F" frameborder="0" allowfullscreen></iframe>
+
+
+<blockquote>
+<p><a href="https://regexper.com/不支持" target="_blank" rel="noopener">https://regexper.com/不支持</a> lookbehind，就不展示了。</p>
+</blockquote>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>还是是英文吧 positive lookahead, negative lookahead, positive lookbehind, negative lookbehind 好记多了</p>
+<p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/">点击这里查看最新的内容</a></strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-24T23:28:44.600Z" itemprop="dateUpdated">2021-02-25 07:28:44</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/" target="_blank" rel="external">http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://aizigao.xyz">
+            <img src="https://avatars0.githubusercontent.com/u/14126445" alt="矮子高">
+            矮子高
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个人吐槽/">个人吐槽</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&title=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&title=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/07/10/记录-笔记-读后-熟练的五笔输入法如同拼音输入和键盘打字都不会中断思维/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[记录][笔记][读后] 熟练的五笔输入法如同拼音输入和键盘打字都不会中断思维</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/03/对象存储图片处理后图片颜色失真问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">OSS对象存储图片处理后颜色失真</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>矮子高 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&title=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&title=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RegExp先行断言后行断言看了半天不懂一看英文我悟到了》 — 矮子高-博客&url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2018/10/23/RegExp先行断言后行断言看了半天不懂一看英文我悟到了/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJ0lEQVR42u3aQXLjQAgFUN//0p5tqhJLH5CnLPx65ZIUi9dZYKAfj3g9f6zfV37f/fnMqyuv7r56Jvl88cLGxsa+Cft5uF695vjK/6Hm/4w/YsPGxsZex07CzVNUvhFJDPlb8jdiY2NjfzM7SRtVTDWNVcsSbGxsbOxqyjnu5PTu5tuHjY2N/Z3sPEVVS45qqqumq7f30rCxsbE/np2nis///Jb5NjY2NvYHs5+DVU0885LjqvixsbGxN7F7R2R6I4Grcmx16PsyNmxsbOxF7F4bKEdWD02+IwU25wzY2NjYN2Qnr+wNbqtlTL5NeSo9EWFjY2MvYk+GpvOgq8VGUqJgY2Njb2VXvyIZ/U6SR56EqgOMchcNGxsb+ybsyYsnf9VLZvlBzFGuxsbGxr4tu1dyVIcH1cKjOoSotpmwsbGx787u/fSvlgTz4e7kYBA2Njb2bnavlZNsStJ4qgbdS5zY2NjYu9nHJcc8bcyHsr2tPNkabGxs7EXsPOi8oZOkvepbegNmbGxs7O9h94apeXDVzU1mGnnMJ/MQbGxs7Juz81Kh+tP/qgKj18Y6iR8bGxt7EXveWqoe2emNk/OKqpBusbGxsVewk4M489SVb0f+THIY6KT2wsbGxl7Brv64nxy1TAC94qQ6hMbGxsbexK42faqpLm/69FJm+YAONjY29mr2VaH0GkPv27g/vg0bGxt7ETv/6iqp9z3Xlj0niRkbGxt7BTtvJCXBXbWJkyRXztvY2NjYK9iPYOUtm/zuZJTbO3KEjY2NvZU9SUiTjbu24MnvYmNjY29iJwkgSUK9bTpuA+Uj3rwgwcbGxt7Hzlvq1evVFtW8CVXYdGxsbOxF7PxgeqFlE5Dyozm91lVUMmFjY2OvYPcOxFQDyouEyRvzrcfGxsbexM5XXh5U8ZNnml00bGxs7HXs3gi2N+LNr8/Hwydbho2Njb2OXU0no9nyYGDcS7qX9dKwsbGxb87uFSQ9fH493zhsbGxs7F5bP288JcduEjA2Njb2d7J7gGoolwUdR3VxLw0bGxv7I9l5gyZvx+dJLhkkT9LeY7KwsbGxP539DwGV1JisAWrVAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

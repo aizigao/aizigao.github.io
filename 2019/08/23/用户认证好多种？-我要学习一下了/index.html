@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>用户认证好多种？ 我要学习一下了 | 矮子高-博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="本博客持续修改与更新中，点击这里查看最新的内容 做了开发几年，登录这块的东西一直了解不多，因为实现的方式有挺多的，我现在要系统的学习一下, 了解一下他们的原理。 目前看了几篇博客，这篇为收集用，之后会用 node 或 java 尝试的写一下。 Cookie-Session 认证我上家公司用的这种方式 流程认证过程大致如下：  用户输入用户名、密码或者用短信验证码方式登录系统；  服务端验证后，创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户认证好多种？ 我要学习一下了">
+<meta property="og:url" content="http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="本博客持续修改与更新中，点击这里查看最新的内容 做了开发几年，登录这块的东西一直了解不多，因为实现的方式有挺多的，我现在要系统的学习一下, 了解一下他们的原理。 目前看了几篇博客，这篇为收集用，之后会用 node 或 java 尝试的写一下。 Cookie-Session 认证我上家公司用的这种方式 流程认证过程大致如下：  用户输入用户名、密码或者用短信验证码方式登录系统；  服务端验证后，创建">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-02-23T05:34:11.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用户认证好多种？ 我要学习一下了">
+<meta name="twitter:description" content="本博客持续修改与更新中，点击这里查看最新的内容 做了开发几年，登录这块的东西一直了解不多，因为实现的方式有挺多的，我现在要系统的学习一下, 了解一下他们的原理。 目前看了几篇博客，这篇为收集用，之后会用 node 或 java 尝试的写一下。 Cookie-Session 认证我上家公司用的这种方式 流程认证过程大致如下：  用户输入用户名、密码或者用短信验证码方式登录系统；  服务端验证后，创建">
+    
+        <link rel="alternate" type="application/atom+xml" title="矮子高-博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars0.githubusercontent.com/u/14126445">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">矮子高</h5>
+          <a href="mailto:weixiangzhe@live.com" title="weixiangzhe@live.com" class="mail">weixiangzhe@live.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/aizigao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/pictool"  >
+                <i class="icon icon-lg icon-link"></i>
+                pictools
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用户认证好多种？ 我要学习一下了</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用户认证好多种？ 我要学习一下了</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-23T11:45:34.000Z" itemprop="datePublished" class="page-time">
+  2019-08-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cookie-Session-认证"><span class="post-toc-number">1.</span> <span class="post-toc-text">Cookie-Session 认证</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Cookie-Session-改造版"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Cookie-Session 改造版</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JWT"><span class="post-toc-number">2.</span> <span class="post-toc-text">JWT</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#认证过程"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">认证过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Auth2"><span class="post-toc-number">3.</span> <span class="post-toc-text">Auth2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强制退登，只允许一个用户登录-SSO"><span class="post-toc-number">4.</span> <span class="post-toc-text">强制退登，只允许一个用户登录 SSO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-用户认证好多种？-我要学习一下了"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用户认证好多种？ 我要学习一下了</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-23 19:45:34" datetime="2019-08-23T11:45:34.000Z"  itemprop="datePublished">2019-08-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz//">点击这里查看最新的内容</a></strong></p>
+<p>做了开发几年，登录这块的东西一直了解不多，因为实现的方式有挺多的，我现在要系统的学习一下, 了解一下他们的原理。 目前看了几篇博客，这篇为收集用，之后会用 node 或 java 尝试的写一下。</p>
+<h2 id="Cookie-Session-认证"><a href="#Cookie-Session-认证" class="headerlink" title="Cookie-Session 认证"></a>Cookie-Session 认证</h2><p>我上家公司用的这种方式</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>认证过程大致如下：</p>
+<ol>
+<li><p>用户输入用户名、密码或者用短信验证码方式登录系统；</p>
+</li>
+<li><p>服务端验证后，创建一个 Session 信息，并且将 SessionID 存到 cookie，发送回浏览器；</p>
+</li>
+<li><p>下次客户端再发起请求，自动带上 cookie 信息，服务端通过 cookie 获取 Session 信息进行校验；<br>弊端</p>
+</li>
+<li><p>只能在 web 场景下使用，如果是 APP 中，不能使用 cookie 的情况下就不能用了(app 里用 http 协议)；</p>
+</li>
+<li><p>即使能在 web 场景下使用，也要考虑跨域问题，因为 cookie 不能跨域(跨域方案, nginx/CORS)；</p>
+</li>
+<li><p>cookie 存在 CSRF（跨站请求伪造）的风险(http-only|https 的下 cookie 设置 secure)；</p>
+</li>
+<li><p>如果是分布式服务，需要考虑 Session 同步问题(redis)；</p>
+</li>
+</ol>
+<h3 id="Cookie-Session-改造版"><a href="#Cookie-Session-改造版" class="headerlink" title="Cookie-Session 改造版"></a>Cookie-Session 改造版</h3><p>由于传统的 Cookie-Session 认证存在诸多问题，可以把上面的方案改造一下。改动的地方如下：</p>
+<ul>
+<li>不用 cookie 做客户端存储，改用其他方式，web 下使用 local storage，APP 中使用客户端数据库，这样就实现了跨域，并且避免了 CSRF ;</li>
+<li>服务端也不存 Session 了，把 Session 信息拿出来存到 Redis 等内存数据库中，这样即提高了速度，又避免了 Session 同步问题；</li>
+</ul>
+<p>经过改造之后变成了如下的认证过程：</p>
+<ol>
+<li>用户输入用户名、密码或者用短信验证码方式登录系统；</li>
+<li>服务端经过验证，将认证信息构造好的数据结构存储到 Redis 中，并将 key 值返回给客户端；</li>
+<li>客户端拿到返回的 key，存储到 local storage 或本地数据库；</li>
+<li>下次客户端再次请求，把 key 值附加到 header 或者 请求体中；</li>
+<li>服务端根据获取的 key，到 Redis 中获取认证信息；</li>
+</ol>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>上面的方案虽然经过了改版，但还是需要客户端和服务器端维持一个状态信息，比如用 cookie 换 session ,或者用 key 换 Redis 的 value 信息，基于 JWT 的 Token 认证方案可以省去这个过程。</p>
+<h3 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h3><ol>
+<li>依然是用户登录系统；</li>
+<li>服务端验证，将认证信息通过指定的算法（例如 HS256）进行加密，例如对用户名和用户所属角色进行加密，加密私钥是保存在服务器端的，将加密后的结果发送给客户端，加密的字符串格式为三个”.” 分隔的字符串 Token，分别对应<strong>头部</strong>、<strong>载荷</strong>与<strong>签名</strong>，头部和载荷都可以通过 base64 解码出来，签名部分不可以；</li>
+<li>客户端拿到返回的 Token，存储到 local storage 或本地数据库；</li>
+<li>下次客户端再次发起请求，将 Token 附加到 header 中；</li>
+<li>服务端获取 header 中的 Token ，通过相同的算法对 Token 中的用户名和所属角色进行相同的加密验证，如果验证结果相同，则说明这个请求是正常的，没有被篡改。这个过程可以完全不涉及到查询 Redis 或其他存储；</li>
+</ol>
+<p><strong>优点</strong></p>
+<ul>
+<li>使用 json 作为数据传输，有广泛的通用型，并且体积小，便于传输；</li>
+<li>不需要在服务器端保存相关信息；</li>
+<li>jwt 载荷部分可以存储业务相关的信息（非敏感的），例如用户信息、角色等；</li>
+</ul>
+<p>TODO: 实现</p>
+<p>##</p>
+<h2 id="Auth2"><a href="#Auth2" class="headerlink" title="Auth2"></a>Auth2</h2><p>wiki:</p>
+<blockquote>
+<p>TODO: 添加 wiki</p>
+</blockquote>
+<p>第三方认证，Auth 也分好多种， 我看了阮老师的文章，主要下面几种</p>
+<h2 id="强制退登，只允许一个用户登录-SSO"><a href="#强制退登，只允许一个用户登录-SSO" class="headerlink" title="强制退登，只允许一个用户登录 SSO"></a>强制退登，只允许一个用户登录 SSO</h2><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>感谢网上的大佬的指导了</p>
+<ul>
+<li><a href="https://www.cnblogs.com/fengzheng/p/8416393.html" target="_blank" rel="noopener">说一说几种常用的登录认证方式，你用的哪种 - 风的姿态 - 博客园</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">理解 OAuth 2.0 - 阮一峰的网络日志</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html" target="_blank" rel="noopener">OAuth 2.0 的四种方式 - 阮一峰的网络日志</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-23T05:34:11.828Z" itemprop="dateUpdated">2021-02-23 13:34:11</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/08/23/用户认证好多种？-我要学习一下了/" target="_blank" rel="external">http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://aizigao.xyz">
+            <img src="https://avatars0.githubusercontent.com/u/14126445" alt="矮子高">
+            矮子高
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&title=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&title=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/18/本地配置https及设备导入证书/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">本地配置https及设备导入证书</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/02/流畅使用CURL与后端撕B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">流畅使用CURL与后端撕B</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>矮子高 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&title=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&pic=https://avatars0.githubusercontent.com/u/14126445" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&title=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&source=前端,js,html,css3,数字图像处理,angular,typescript,开发,程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用户认证好多种？ 我要学习一下了》 — 矮子高-博客&url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/&via=http://aizigao.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://aizigao.xyz/2019/08/23/用户认证好多种？-我要学习一下了/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3a0WojMQwF0P7/T2dhnxZKZu6VR00Xjp9CSJ05LliKpK+veL3+rn9ff3/n+vW7d77v+e673v3tAwsPDw9v9OjvVvuZlpFj2ufBw8PD2+YlwaC9e5OgchKcrj+Dh4eH9xt4s4fOg0FOwsPDw/t/eQl4tk8ebPDw8PA+xTtJi9vCa7vD7Ajw8PDw9ngnhYBPvV7v7+Hh4eGNuurJmg0TzJLj+tnw8PDwFnhtQpy0wTYCzOxY8fDw8DZ41+7kp/71X13vlheOh4UGPDw8vB/nzdLZukEVHEpbAsbDw8Pb482u5tn1ne88K14kI1x4eHh457xZQvwzTbIEdn0QeHh4eBu8Weo8CyH5QeTl43qwAA8PD+8hXnu9Jg/RgpOQ0O6Dh4eHt83LW1azAYKNbylq1Xh4eHiP8s7Hqs7bVG0DrB1KwMPDw3uK9xqttqyQU5Nibs7Gw8PD+xRvVjjIkSch5CYRx8PDw1vg5T/y21R7Fkhm6XXxtHh4eHjHvJMRq7w1lR9ZPnAQHRYeHh7eAm+WWLdDUe3Os8Dw9mjw8PDwFnhty6pNl0+u/tkI183/EA8PD++Y1xZhr6lPlYPPU3Y8PDy8DV7edmoxbSFjFjxuvhcPDw9vjZdf9CctsY30+uZ9PDw8vAVeu+lXsJKH3hjVKoau8PDw8A54s3bURiqcl4OLgjIeHh7eAu+kqJp/ZV7yuKk3B8GsGCDAw8PDG/Fe5WqHrtpRrTbVvjkyPDw8vAVevk7S3Paw2gCThDQ8PDy8Z3mz4aq2PdYWdtsS8DD64eHh4R3wTmoYeekhDwknWXHd08PDw8Nb5p2UFWYtt1nBAg8PD+838GZX/2zQqi0Zvz0UPDw8vDVeXoz4FDVPrI9qLXh4eHjx/Tn8qV8m3CekWaEZDw8P71HeH2GFGDx/kOvtAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
