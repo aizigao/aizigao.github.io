@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>黑苹果10.12.* voodooPS2Controller 改caps为ctrl | 矮子高-博客</title>
+  <meta name="description" content="本博客持续修改与更新中，点击这里查看最新的内容   背景黑苹果也就是hackintosh常用的键盘驱动不能在偏好设置直接将caps改为control，会有bug。RehabMan本人说也不会去修改这个问题。  操作RehabMan说可以用 plguin 下info.plist 进行ADB映射去解决这个问题😎，步骤如下  进入路径 1$ cd VoodooPS2Controller.kext&#x2F;Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑苹果10.12.* voodooPS2Controller 改caps为ctrl">
+<meta property="og:url" content="http://aizigao.xyz/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="本博客持续修改与更新中，点击这里查看最新的内容   背景黑苹果也就是hackintosh常用的键盘驱动不能在偏好设置直接将caps改为control，会有bug。RehabMan本人说也不会去修改这个问题。  操作RehabMan说可以用 plguin 下info.plist 进行ADB映射去解决这个问题😎，步骤如下  进入路径 1$ cd VoodooPS2Controller.kext&#x2F;Co">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/others/hackintosh/170307_001.png">
+<meta property="article:published_time" content="2017-03-07T04:58:48.000Z">
+<meta property="article:modified_time" content="2023-08-18T02:07:53.850Z">
+<meta property="article:author" content="矮子高">
+<meta property="article:tag" content="others">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/others/hackintosh/170307_001.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://aizigao.xyz/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="矮子高-博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aizigao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">aizigao</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</h3>
+        <!-- <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> </small> -->
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aizigao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/" rel="tag">css3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">frontend oss 图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/" rel="tag">others</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" rel="tag">个人吐槽</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" rel="tag">记录，笔记, 读后</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/css/" style="font-size: 13px;">css</a> <a href="/tags/css3/" style="font-size: 13.5px;">css3</a> <a href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 13px;">frontend oss 图像处理</a> <a href="/tags/js/" style="font-size: 13px;">js</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/others/" style="font-size: 14px;">others</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/test/" style="font-size: 13px;">test</a> <a href="/tags/tools/" style="font-size: 13px;">tools</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" style="font-size: 13px;">个人吐槽</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">个人笔记</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 13px;">动画</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13px;">脚本</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 13px;">英语</a> <a href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" style="font-size: 13px;">记录，笔记, 读后</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/08/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93/" class="title">移动端调试工具个人小结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-08T13:25:05.000Z" itemprop="datePublished">2021-04-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/25/%E4%B8%AA%E4%BA%BA%E9%9D%A2%E8%AF%95%E7%94%A8%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E5%A4%87%E4%BB%BD/" class="title">个人面试用的思维导图备份</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-25T14:48:15.000Z" itemprop="datePublished">2020-12-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/" class="title">在iconfont上字体链接中获取图标svg文件(python)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-23T13:08:14.000Z" itemprop="datePublished">2020-07-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/06/03/JS%E4%B8%AD%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%B8%AA%E4%BA%BA%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" class="title">JS中枚举类型个人处理方式(BraketEnum)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-06-03T12:56:08.000Z" itemprop="datePublished">2020-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/23/nginx-%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B/" class="title">nginx_个人常用功能记录一下</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-23T06:41:22.000Z" itemprop="datePublished">2020-05-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-黑苹果10-12-voodooPS2Controller-改caps为ctrl" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      黑苹果10.12.* voodooPS2Controller 改caps为ctrl
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/" class="article-date">
+	  <time datetime="2017-03-07T04:58:48.000Z" itemprop="datePublished">2017-03-07</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/others/" rel="tag">others</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 362(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/">点击这里查看最新的内容</a></strong></p>
+<!-- toc -->
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>黑苹果也就是hackintosh常用的键盘驱动<strong>不能在偏好设置</strong>直接将caps改为control，会有bug。RehabMan本人说也不会去修改这个问题。</p>
+<p><img src="https://aizigao-blog-1257747336.cos.ap-shanghai.myqcloud.com/others/hackintosh/170307_001.png"></p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><p>RehabMan说可以用 plguin 下info.plist 进行ADB映射去解决这个问题😎，步骤如下</p>
+<ul>
+<li><p>进入路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/ç</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 Info.plist, 我这里用的编译器是vim。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim Info.plist</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到 <code>IOKitPersonalities-&gt;ApplePS2Keyboard-&gt;Platform Profile-&gt;Default-&gt;Custom PS2 Map/Custom ADB Map</code>这段</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;array&gt;</span><br><span class="line">  &lt;string&gt;;Items must be strings in the form of breaklessscan (in hex)&lt;/string&gt;</span><br><span class="line"> &lt;/array&gt;</span><br><span class="line">  &lt;key&gt;Custom ADB Map&lt;/key&gt;</span><br><span class="line"> &lt;array&gt;</span><br><span class="line">  &lt;string&gt;;Items must be strings in the form of scanfrom=adbto (in hex)&lt;/string&gt;</span><br><span class="line">  &lt;string&gt;3a=3b;caps to left ctrl&lt;/string&gt;</span><br><span class="line"> &lt;/array&gt;</span><br><span class="line"> &lt;key&gt;Custom PS2 Map&lt;/key&gt;</span><br><span class="line">&lt;array&gt;</span><br><span class="line">&lt;string&gt;;Items must be strings in the form of scanfrom=scanto (in hex)&lt;/string&gt;</span><br><span class="line">&lt;string&gt;e027=0;disable discrete fnkeys toggle&lt;/string&gt;</span><br><span class="line"> &lt;string&gt;e028=0;disable discrete trackpad toggle&lt;/string&gt;</span><br><span class="line"> &lt;/array&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面重点是添加了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string&gt;3a=3b;caps to left ctrl&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p><img src="data:image/jpeg;base64,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"></p>
+<p>你也可以将 <strong>caps改成esc之类</strong>的，这里提供下我的参考资源，如有其它的定制需求，你可以参照下面的贴子</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%8C%89%E9%94%AE%E6%98%A0%E5%B0%84%E5%8A%9F%E8%83%BD">github 如何使用自定义的按键映射功能</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.yekki.me/how-to-mapping-keys-on-ps2/"><a target="_blank" rel="noopener" href="http://www.yekki.me/how-to-mapping-keys-on-ps2/">如何使用自定义的按键影射功能</a></a></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://aizigao.xyz/2017/03/07/%E9%BB%91%E8%8B%B9%E6%9E%9C10-12-voodooPS2Controller-%E6%94%B9caps%E4%B8%BActrl/" title="黑苹果10.12.* voodooPS2Controller 改caps为ctrl" target="_blank" rel="external">http://aizigao.xyz/2017/03/07/黑苹果10-12-voodooPS2Controller-改caps为ctrl/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aizigao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aizigao" target="_blank"><span class="text-dark">aizigao</span><small class="ml-1x">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2017/03/08/%E9%9D%9Egif-video-%E7%94%A8%E7%BA%AFcss3%E7%9A%84%E5%81%9A%E7%9A%84%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE/" title=" 非gif/video,用纯css3的做的动态背景图"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2017/03/02/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E5%88%86%E4%BA%AB/" title="网络工程师思维导图分享"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+  
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aizigao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+  <div class="copyright">
+    
+    <!-- <div class="publishby">
+      Theme by
+      <a href="https://github.com/cofess" target="_blank"> cofess </a>base on
+      <a href="https://github.com/cofess/hexo-theme-pure" target="_blank"
+        >pure</a
+      >.
+    </div> -->
+  </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '4cac290eb73e020734d9',
+    clientSecret: '15d05cb15f2d47d348ed158011a5625b2c4d30a2',
+    repo: 'blogs',
+    owner: 'aizigao',
+    admin: ['aizigao'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

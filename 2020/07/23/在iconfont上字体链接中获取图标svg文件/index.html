@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>在iconfont上字体链接中获取图标svg文件(python) | 矮子高-博客</title>
+  <meta name="description" content="前言现在国内越来越多的网站开始用Iconfont-阿里巴巴矢量图标库　管理图标. 使用svg或者font图标，这种方式确实很方便并且大大减小了前端开发一部分工作量，当我看到一个网站用了iconfont的图标，并且我非常钟意它的设计时，我就有种想要获取一份它们原始svg文件的冲动，在我尝试一番后，终于让我总结了一波如何快速操作的方法。 分析打开iconfont.cn,　我建了一个测试项目,里面两个图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在iconfont上字体链接中获取图标svg文件(python)">
+<meta property="og:url" content="http://aizigao.xyz/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="矮子高-博客">
+<meta property="og:description" content="前言现在国内越来越多的网站开始用Iconfont-阿里巴巴矢量图标库　管理图标. 使用svg或者font图标，这种方式确实很方便并且大大减小了前端开发一部分工作量，当我看到一个网站用了iconfont的图标，并且我非常钟意它的设计时，我就有种想要获取一份它们原始svg文件的冲动，在我尝试一番后，终于让我总结了一波如何快速操作的方法。 分析打开iconfont.cn,　我建了一个测试项目,里面两个图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/03/01/VAT83zxRdBM6Es5.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/01/UcCo4Iq2DH9Pk3Q.png">
+<meta property="article:published_time" content="2020-07-23T13:08:14.000Z">
+<meta property="article:modified_time" content="2023-08-18T02:07:53.310Z">
+<meta property="article:author" content="矮子高">
+<meta property="article:tag" content="脚本">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/01/VAT83zxRdBM6Es5.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://aizigao.xyz/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="矮子高-博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aizigao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">aizigao</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</h3>
+        <!-- <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> </small> -->
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aizigao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/" rel="tag">css3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">frontend oss 图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/" rel="tag">others</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" rel="tag">个人吐槽</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" rel="tag">记录，笔记, 读后</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/css/" style="font-size: 13px;">css</a> <a href="/tags/css3/" style="font-size: 13.5px;">css3</a> <a href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 13px;">frontend oss 图像处理</a> <a href="/tags/js/" style="font-size: 13px;">js</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/others/" style="font-size: 14px;">others</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/test/" style="font-size: 13px;">test</a> <a href="/tags/tools/" style="font-size: 13px;">tools</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" style="font-size: 13px;">个人吐槽</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">个人笔记</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 13px;">动画</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13px;">脚本</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 13px;">英语</a> <a href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" style="font-size: 13px;">记录，笔记, 读后</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/08/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93/" class="title">移动端调试工具个人小结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-08T13:25:05.000Z" itemprop="datePublished">2021-04-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/25/%E4%B8%AA%E4%BA%BA%E9%9D%A2%E8%AF%95%E7%94%A8%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E5%A4%87%E4%BB%BD/" class="title">个人面试用的思维导图备份</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-25T14:48:15.000Z" itemprop="datePublished">2020-12-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/" class="title">在iconfont上字体链接中获取图标svg文件(python)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-23T13:08:14.000Z" itemprop="datePublished">2020-07-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/06/03/JS%E4%B8%AD%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%B8%AA%E4%BA%BA%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" class="title">JS中枚举类型个人处理方式(BraketEnum)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-06-03T12:56:08.000Z" itemprop="datePublished">2020-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/23/nginx-%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B/" class="title">nginx_个人常用功能记录一下</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-23T06:41:22.000Z" itemprop="datePublished">2020-05-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-在iconfont上字体链接中获取图标svg文件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在iconfont上字体链接中获取图标svg文件(python)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/" class="article-date">
+	  <time datetime="2020-07-23T13:08:14.000Z" itemprop="datePublished">2020-07-23</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="article-tag-link-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在国内越来越多的网站开始用<a target="_blank" rel="noopener" href="https://www.iconfont.cn/">Iconfont-阿里巴巴矢量图标库</a>　管理图标. 使用svg或者font图标，这种方式确实很方便并且大大减小了前端开发一部分工作量，当我看到一个网站用了iconfont的图标，并且我非常钟意它的设计时，我就有种想要获取一份它们原始svg文件的冲动，在我尝试一番后，终于让我总结了一波如何快速操作的方法。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><strong>打开iconfont.cn,　我建了一个测试项目,里面两个图标</strong></p>
+<p><img src="https://i.loli.net/2021/03/01/VAT83zxRdBM6Es5.png" alt="iconfont 项目截图"></p>
+<p>可以看到它提供了三个文件格式</p>
+<ul>
+<li>Unicode<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&#x27;iconfont&#x27;</span>;  <span class="comment">/* project id 1760743 */</span></span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.eot&#x27;</span>);</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.eot?#iefix&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;embedded-opentype&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.woff2&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;woff2&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.woff&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;woff&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.ttf&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;truetype&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;//at.alicdn.com/t/font_1760743_cqc31zkvkvd.svg#iconfont&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;svg&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>font Css</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//at.alicdn.com/t/font_1760743_cqc31zkvkvd.css</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>symbols</code> 格式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//at.alicdn.com/t/font_1760743_cqc31zkvkvd.js</span><br></pre></td></tr></table></figure>
+
+<p>从上面看，每个项目都有唯一值是 <code>1760743_cqc31zkvkvd </code>，只有获取这个字段就可以下载到对应的, Unicode下的ttf&#x2F;woff之类的字体，fontcss的css文件及 symbols,　我这次的目标是导出svg,　感觉symbols格式是最简单的。 如上面的例子中，对应的symbols内容对应的js文件</p>
+<p><img src="https://i.loli.net/2021/03/01/UcCo4Iq2DH9Pk3Q.png" alt="js 里的内容"></p>
+<p>可以看到<code>el=&#39;&lt;svg=....&gt;&#39;</code>里的就是我们需要的svg, 复制格式化一下,内容为一个svg文件，内部有两个symbol</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">&quot;icon-fail&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 1024 1024&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">      <span class="attr">d</span>=<span class="string">&quot;M512 0C228.69504 0 0 228.69504 0 512s228.69504 512 512 512 512-228.69504 512-512S795.30496 0 512 0zM362.67008 332.36992c7.68 0 15.36 2.98496 21.32992 8.96l130.56 126.1568 130.56-126.1568c5.97504-5.97504 13.64992-8.53504 21.32992-8.32 7.68 0.21504 15.36512 3.2 21.34016 8.32 11.94496 11.94496 11.94496 30.72 0 42.67008l-129.8176 125.44 129.8176 125.44c11.94496 11.94496 11.94496 30.72 0 42.67008-11.94496 11.94496-30.72 11.94496-42.67008 0l-130.56-126.1568-130.56 126.1568c-11.94496 11.94496-30.72 11.94496-42.67008 0-11.94496-11.94496-11.94496-30.72 0-42.67008l129.8176-125.44L341.32992 384c-11.94496-11.94496-11.94496-30.72 0-42.67008a30.09024 30.09024 0 0 1 21.34016-8.96z&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">fill</span>=<span class="string">&quot;#FF4D29&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">&quot;icon-waitting-copy&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 1024 1024&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">      <span class="attr">d</span>=<span class="string">&quot;M512 0C229.23776 0 0 229.23776 0 512s229.23776 512 512 512 512-229.23776 512-512S794.76224 0 512 0z m-16.07168 225.8944a34.13504 34.13504 0 0 1 33.14176 34.11456v286.12096H819.2A34.13504 34.13504 0 0 1 819.2 614.4H494.92992a34.13504 34.13504 0 0 1-33.4592-40.66816 34.13504 34.13504 0 0 1-0.67072-6.52288v-307.2a34.13504 34.13504 0 0 1 35.12832-34.11968z&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">fill</span>=<span class="string">&quot;#FF8000&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>symbol转为svg,其它只要替换<code>symbol</code>为<code>svg</code> 就好了，再删除原来的最外部的<code>&lt;svg&gt;&lt;/svg&gt;</code>就可以了，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;icon-fail&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 1024 1024&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">d</span>=<span class="string">&quot;M512 0C228.69504 0 0 228.69504 0 512s228.69504 512 512 512 512-228.69504 512-512S795.30496 0 512 0zM362.67008 332.36992c7.68 0 15.36 2.98496 21.32992 8.96l130.56 126.1568 130.56-126.1568c5.97504-5.97504 13.64992-8.53504 21.32992-8.32 7.68 0.21504 15.36512 3.2 21.34016 8.32 11.94496 11.94496 11.94496 30.72 0 42.67008l-129.8176 125.44 129.8176 125.44c11.94496 11.94496 11.94496 30.72 0 42.67008-11.94496 11.94496-30.72 11.94496-42.67008 0l-130.56-126.1568-130.56 126.1568c-11.94496 11.94496-30.72 11.94496-42.67008 0-11.94496-11.94496-11.94496-30.72 0-42.67008l129.8176-125.44L341.32992 384c-11.94496-11.94496-11.94496-30.72 0-42.67008a30.09024 30.09024 0 0 1 21.34016-8.96z&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">fill</span>=<span class="string">&quot;#FF4D29&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;icon-waitting-copy&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 1024 1024&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">d</span>=<span class="string">&quot;M512 0C229.23776 0 0 229.23776 0 512s229.23776 512 512 512 512-229.23776 512-512S794.76224 0 512 0z m-16.07168 225.8944a34.13504 34.13504 0 0 1 33.14176 34.11456v286.12096H819.2A34.13504 34.13504 0 0 1 819.2 614.4H494.92992a34.13504 34.13504 0 0 1-33.4592-40.66816 34.13504 34.13504 0 0 1-0.67072-6.52288v-307.2a34.13504 34.13504 0 0 1 35.12832-34.11968z&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">fill</span>=<span class="string">&quot;#FF8000&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>之后就是将svg取出，取到每个svg的<code>id</code>属性做为文件名写入对应文件里就好了，这一块可以写一个脚本处理。</p>
+<h2 id="简化流程"><a href="#简化流程" class="headerlink" title="简化流程"></a>简化流程</h2><p>可以看到整个过程比较通用，我这里写了个python脚本处理一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests <span class="comment"># 自行安装</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_svgs_from_js_link</span>(<span class="params">fileLink</span>):</span><br><span class="line">    <span class="comment"># -- 获取内容</span></span><br><span class="line">    file_content = <span class="built_in">str</span>(requests.get(fileLink).content)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># --- 从js中获取svg内容</span></span><br><span class="line">    svg_str_regex = <span class="string">r&quot;\&lt;svg\&gt;(.*?)\&lt;\/svg\&gt;&quot;</span></span><br><span class="line">    matches = re.findall(svg_str_regex, file_content)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 有svg时</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(matches):</span><br><span class="line">        svg_str = re.sub(<span class="string">r&#x27;symbol&#x27;</span>, <span class="string">&#x27;svg&#x27;</span>, matches[<span class="number">0</span>])</span><br><span class="line">        svg_str = re.sub(<span class="string">&#x27;&lt;/svg&gt;&#x27;</span>, <span class="string">&#x27;&lt;/svg&gt;@@@&#x27;</span>, svg_str)</span><br><span class="line">        svg_list = svg_str.split(<span class="string">&#x27;@@@&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 清理dist</span></span><br><span class="line">        <span class="keyword">if</span> os.path.exists(<span class="string">&#x27;./dist&#x27;</span>):</span><br><span class="line">            shutil.rmtree(<span class="string">&quot;./dist&quot;</span>)</span><br><span class="line">        os.mkdir(<span class="string">&#x27;./dist&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> svgContent <span class="keyword">in</span> svg_list:</span><br><span class="line">            <span class="keyword">if</span> svgContent:</span><br><span class="line">                fileName = re.findall(<span class="string">r&#x27;id=\&quot;(.*?)\&quot;&#x27;</span>, svgContent)[<span class="number">0</span>]</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;写入icon %s&#x27;</span> % fileName)</span><br><span class="line">                f = <span class="built_in">open</span>(<span class="string">&quot;./dist/%s.svg&quot;</span> % fileName, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">                f.write(svgContent)</span><br><span class="line">                f.close()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;搞定啦!!!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;使用方式如: \n python3 ./icon_symbol_to_svg http://at.alicdn.com/t/font_1760743_cqc31zkvkvd.js&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        get_svgs_from_js_link(sys.argv[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ./icon_symbol_to_svg http://at.alicdn.com/t/font_1760743_cqc31zkvkvd.js</span><br></pre></td></tr></table></figure>
+
+<p>然后你在dist文件下你可以看到所有的svg了</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ul>
+<li>写了脚本后方便了很多，细节就不考虑了，能用就行;</li>
+<li>python脚本简简写写还是比node方便一点,　不带node_module走比较方便，下次试试deno版本的。</li>
+</ul>
+<p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6">点击这里查看最新的内容</a></strong></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://aizigao.xyz/2020/07/23/%E5%9C%A8iconfont%E4%B8%8A%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%9B%BE%E6%A0%87svg%E6%96%87%E4%BB%B6/" title="在iconfont上字体链接中获取图标svg文件(python)" target="_blank" rel="external">http://aizigao.xyz/2020/07/23/在iconfont上字体链接中获取图标svg文件/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aizigao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aizigao" target="_blank"><span class="text-dark">aizigao</span><small class="ml-1x">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/12/25/%E4%B8%AA%E4%BA%BA%E9%9D%A2%E8%AF%95%E7%94%A8%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E5%A4%87%E4%BB%BD/" title="个人面试用的思维导图备份"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/06/03/JS%E4%B8%AD%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%B8%AA%E4%BA%BA%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" title="JS中枚举类型个人处理方式(BraketEnum)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+  
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aizigao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+  <div class="copyright">
+    
+    <!-- <div class="publishby">
+      Theme by
+      <a href="https://github.com/cofess" target="_blank"> cofess </a>base on
+      <a href="https://github.com/cofess/hexo-theme-pure" target="_blank"
+        >pure</a
+      >.
+    </div> -->
+  </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '4cac290eb73e020734d9',
+    clientSecret: '15d05cb15f2d47d348ed158011a5625b2c4d30a2',
+    repo: 'blogs',
+    owner: 'aizigao',
+    admin: ['aizigao'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
