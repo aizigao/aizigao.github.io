@@ -18,16 +18,16 @@
   
   
   <title>看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作) | 矮子高-博客</title>
-  <meta name="description" content="简述Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。  我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写sudo chmod +wr之类的，">
+  <meta name="description" content="简述 Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。  我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写sudo chmod +wr之类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="看完这张图后，我终于记住了chmod的数值了(标志位与掩码的操作)">
 <meta property="og:url" content="http://aizigao.xyz/2020/04/01/%E7%9C%8B%E5%AE%8C%E8%BF%99%E5%BC%A0%E5%9B%BE%E5%90%8E%EF%BC%8C%E6%88%91%E7%BB%88%E4%BA%8E%E8%AE%B0%E4%BD%8F%E4%BA%86chmod%E7%9A%84%E6%95%B0%E5%80%BC%E4%BA%86_%E6%A0%87%E5%BF%97%E4%BD%8D%E4%B8%8E%E6%8E%A9%E7%A0%81%E7%9A%84%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="矮子高-博客">
-<meta property="og:description" content="简述Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。  我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写sudo chmod +wr之类的，">
+<meta property="og:description" content="简述 Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 sudo chmod 777 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。  我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写sudo chmod +wr之类">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg">
 <meta property="article:published_time" content="2020-04-01T06:26:56.000Z">
-<meta property="article:modified_time" content="2023-08-18T02:07:53.667Z">
+<meta property="article:modified_time" content="2023-08-20T14:33:53.865Z">
 <meta property="article:author" content="矮子高">
 <meta property="article:tag" content="个人笔记">
 <meta name="twitter:card" content="summary">
@@ -63,7 +63,7 @@
           <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">aizigao</h2>
-        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</h3>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Enough theory</h3>
         <!-- <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> </small> -->
       </div>
       
@@ -180,7 +180,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/" rel="tag">css3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">frontend oss 图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/" rel="tag">others</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" rel="tag">个人吐槽</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" rel="tag">记录，笔记, 读后</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/" rel="tag">others</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-%E5%89%8D%E7%AB%AF/" rel="tag">web 前端</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" rel="tag">个人吐槽</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" rel="tag">记录，笔记, 读后</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -190,7 +190,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/css/" style="font-size: 13px;">css</a> <a href="/tags/css3/" style="font-size: 13.5px;">css3</a> <a href="/tags/frontend-oss-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 13px;">frontend oss 图像处理</a> <a href="/tags/js/" style="font-size: 13px;">js</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/others/" style="font-size: 14px;">others</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/test/" style="font-size: 13px;">test</a> <a href="/tags/tools/" style="font-size: 13px;">tools</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" style="font-size: 13px;">个人吐槽</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">个人笔记</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 13px;">动画</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13px;">脚本</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 13px;">英语</a> <a href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" style="font-size: 13px;">记录，笔记, 读后</a>
+      <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/others/" style="font-size: 13.33px;">others</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/test/" style="font-size: 13px;">test</a> <a href="/tags/tools/" style="font-size: 13px;">tools</a> <a href="/tags/web-%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">web 前端</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%90%90%E6%A7%BD/" style="font-size: 13px;">个人吐槽</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">个人笔记</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 13px;">动画</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 13px;">图像处理</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13px;">脚本</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 13px;">英语</a> <a href="/tags/%E8%AE%B0%E5%BD%95%EF%BC%8C%E7%AC%94%E8%AE%B0-%E8%AF%BB%E5%90%8E/" style="font-size: 13px;">记录，笔记, 读后</a>
     </div>
   </div>
 
@@ -338,7 +338,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/01/%E7%9C%8B%E5%AE%8C%E8%BF%99%E5%BC%A0%E5%9B%BE%E5%90%8E%EF%BC%8C%E6%88%91%E7%BB%88%E4%BA%8E%E8%AE%B0%E4%BD%8F%E4%BA%86chmod%E7%9A%84%E6%95%B0%E5%80%BC%E4%BA%86_%E6%A0%87%E5%BF%97%E4%BD%8D%E4%B8%8E%E6%8E%A9%E7%A0%81%E7%9A%84%E6%93%8D%E4%BD%9C/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 534(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 511(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
@@ -348,73 +348,75 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 <code>sudo chmod 777</code> 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg" alt="来源于菜鸟教程"></p>
+        <h2 id="简述"><a class="markdownIt-Anchor" href="#简述"></a> 简述</h2>
+<p>Linux chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令, 一般我们写 <code>sudo chmod 777</code> 时对应的是对文件所有者（Owner）、用户组（Group）、其它用户（Other Users）都加上读, 写和执行的权限。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/file-permissions-rwx.jpg" alt="来源于菜鸟教程" /></p>
 <p>我们知道读，写，执行 对应的具体数值是 4，2，1, 但是这几个数值点我一直是记不住的，好在可以写<code>sudo chmod +wr</code>之类的，直到我翻看了下 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Chmod">wiki</a>, 看到了这样一张表</p>
 <table>
 <thead>
 <tr>
-<th align="center">#</th>
-<th align="center">Permission</th>
-<th align="center">rwx</th>
-<th align="center">Binary</th>
+<th style="text-align:center">#</th>
+<th style="text-align:center">Permission</th>
+<th style="text-align:center">rwx</th>
+<th style="text-align:center">Binary</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">7</td>
-<td align="center">read, write and execute</td>
-<td align="center">rwx</td>
-<td align="center">111</td>
+<tbody>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">read, write and execute</td>
+<td style="text-align:center">rwx</td>
+<td style="text-align:center">111</td>
 </tr>
 <tr>
-<td align="center">6</td>
-<td align="center">read and write</td>
-<td align="center">rw-</td>
-<td align="center">110</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">read and write</td>
+<td style="text-align:center">rw-</td>
+<td style="text-align:center">110</td>
 </tr>
 <tr>
-<td align="center">5</td>
-<td align="center">read and execute</td>
-<td align="center">r-x</td>
-<td align="center">101</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">read and execute</td>
+<td style="text-align:center">r-x</td>
+<td style="text-align:center">101</td>
 </tr>
 <tr>
-<td align="center">4</td>
-<td align="center">read only</td>
-<td align="center">r–</td>
-<td align="center">100</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">read only</td>
+<td style="text-align:center">r–</td>
+<td style="text-align:center">100</td>
 </tr>
 <tr>
-<td align="center">3</td>
-<td align="center">write and execute</td>
-<td align="center">-wx</td>
-<td align="center">011</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">write and execute</td>
+<td style="text-align:center">-wx</td>
+<td style="text-align:center">011</td>
 </tr>
 <tr>
-<td align="center">2</td>
-<td align="center">write only</td>
-<td align="center">-w-</td>
-<td align="center">010</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">write only</td>
+<td style="text-align:center">-w-</td>
+<td style="text-align:center">010</td>
 </tr>
 <tr>
-<td align="center">1</td>
-<td align="center">execute only</td>
-<td align="center">–x</td>
-<td align="center">001</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">execute only</td>
+<td style="text-align:center">–x</td>
+<td style="text-align:center">001</td>
 </tr>
 <tr>
-<td align="center">0</td>
-<td align="center">none</td>
-<td align="center">—</td>
-<td align="center">000</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">none</td>
+<td style="text-align:center">—</td>
+<td style="text-align:center">000</td>
 </tr>
-</tbody></table>
-<p>懂了，421都是对应的二进制表示上的 1&#x2F;0，1为开，0为关闭，极为清晰。然后也翻阅了一下 mdn 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">按位操作符</a>, 学习了下标志位与掩码的操作。</p>
-<h2 id="标志位与掩码的操作"><a href="#标志位与掩码的操作" class="headerlink" title="标志位与掩码的操作"></a>标志位与掩码的操作</h2><p>下面的例子来自MDN</p>
+</tbody>
+</table>
+<p>懂了，421都是对应的二进制表示上的 1/0，1为开，0为关闭，极为清晰。然后也翻阅了一下 mdn 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">按位操作符</a>, 学习了下标志位与掩码的操作。</p>
+<h2 id="标志位与掩码的操作"><a class="markdownIt-Anchor" href="#标志位与掩码的操作"></a> 标志位与掩码的操作</h2>
+<p>下面的例子来自MDN</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable constant_">FLAG_A</span> = <span class="number">0b0001</span>; <span class="comment">// 0001 ant</span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">FLAG_B</span> = <span class="number">0b0010</span>; <span class="comment">// 0010 bat</span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">FLAG_C</span> = <span class="number">0b0100</span>; <span class="comment">// 0100 cat</span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">FLAG_D</span> = <span class="number">0b1000</span>; <span class="comment">// 1000 duck</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mask = <span class="variable constant_">FLAG_A</span> | <span class="variable constant_">FLAG_B</span> | <span class="variable constant_">FLAG_D</span>; <span class="comment">// 0001 | 0010 | 1000 =&gt; 1011</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flags = <span class="number">0b001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 cat</span></span><br><span class="line"><span class="keyword">if</span> (flags &amp; <span class="variable constant_">FLAG_C</span>) &#123; <span class="comment">// 0101 &amp; 0100 =&gt; 0100 =&gt; true</span></span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 bat 或者 cat 至少一个</span></span><br><span class="line"><span class="comment">// (0101 &amp; 0010) || (0101 &amp; 0100) =&gt; 0000 || 0100 =&gt; true</span></span><br><span class="line"><span class="keyword">if</span> ((flags &amp; <span class="variable constant_">FLAG_B</span>) || (flags &amp; <span class="variable constant_">FLAG_C</span>)) &#123;</span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们有 bat 或者 cat 至少一个</span></span><br><span class="line"><span class="keyword">var</span> mask = <span class="variable constant_">FLAG_B</span> | <span class="variable constant_">FLAG_C</span>; <span class="comment">// 0010 | 0100 =&gt; 0110</span></span><br><span class="line"><span class="keyword">if</span> (flags &amp; mask) &#123; <span class="comment">// 0101 &amp; 0110 =&gt; 0100 =&gt; true</span></span><br><span class="line">   <span class="comment">// do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们有 cat 和 duck</span></span><br><span class="line"><span class="keyword">var</span> mask = <span class="variable constant_">FLAG_C</span> | <span class="variable constant_">FLAG_D</span>; <span class="comment">// 0100 | 1000 =&gt; 1100</span></span><br><span class="line">flags |= mask;   <span class="comment">// 0101 | 1100 =&gt; 1101</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们没有 ant 也没有 cat</span></span><br><span class="line"><span class="keyword">var</span> mask = ~(<span class="variable constant_">FLAG_A</span> | <span class="variable constant_">FLAG_C</span>); <span class="comment">// ~0101 =&gt; 1010</span></span><br><span class="line">flags &amp;= mask;   <span class="comment">// 1101 &amp; 1010 =&gt; 1000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们没有 ant 也没有 cat</span></span><br><span class="line"><span class="keyword">var</span> mask = ~<span class="variable constant_">FLAG_A</span> &amp; ~<span class="variable constant_">FLAG_C</span>;</span><br><span class="line">flags &amp;= mask;   <span class="comment">// 1101 &amp; 1010 =&gt; 1000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们以前没有 bat ，那么我们现在有 bat</span></span><br><span class="line"><span class="comment">// 但是如果我们已经有了一个，那么现在没有了</span></span><br><span class="line"><span class="comment">// 对 cat 也是相同的情况</span></span><br><span class="line"><span class="keyword">var</span> mask = <span class="variable constant_">FLAG_B</span> | <span class="variable constant_">FLAG_C</span>;</span><br><span class="line">flags = flags ^ mask;   <span class="comment">// 1100 ^ 0110 =&gt; 1010</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// entering parallel universe...</span></span><br><span class="line">flags = ~flags;    <span class="comment">// ~1010 =&gt; 0101</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>这样大大的简化比较，在React也大量使用这种方式；</p>
-<p><strong>本博客持续修改与更新中，<a href="http://aizigao.xyz/2020/04/01/%E7%9C%8B%E5%AE%8C%E8%BF%99%E5%BC%A0%E5%9B%BE%E5%90%8E%EF%BC%8C%E6%88%91%E7%BB%88%E4%BA%8E%E8%AE%B0%E4%BD%8F%E4%BA%86chmod%E7%9A%84%E6%95%B0%E5%80%BC%E4%BA%86/">点击这里查看最新的内容</a></strong></p>
 
       
     </div>
@@ -443,7 +445,7 @@
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/aizigao" target="_blank"><span class="text-dark">aizigao</span><small class="ml-1x">Enough theory, seeing it in action probably explains more than carefully reading the above stuff.</small></a></h3>
+        <h3 class="media-heading"><a href="https://github.com/aizigao" target="_blank"><span class="text-dark">aizigao</span><small class="ml-1x">Enough theory</small></a></h3>
         <div></div>
       </div>
     </figure>
